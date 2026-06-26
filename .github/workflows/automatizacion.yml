@@ -1,0 +1,26 @@
+name: Robot Ejecutor de Python
+
+# ¿Cuándo se activa? Cuando subimos código a la rama main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  ejecutar-script:
+    # ¿En dónde? En una computadora Ubuntu gratis que nos presta GitHub
+    runs-on: ubuntu-latest
+
+    steps:
+    # Paso 1: Copiar los archivos de nuestro repositorio en esa computadora virtual
+    - name: Descargar el código
+      uses: actions/checkout@v4
+
+    # Paso 2: Instalar Python en esa computadora
+    - name: Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    # Paso 3: Ejecutar nuestro archivo de Python
+    - name: Correr script
+      run: python saludo.py
